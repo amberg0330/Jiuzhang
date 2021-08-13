@@ -1,5 +1,5 @@
 # Description
-# Follow up Zigzag Iterator: What if you are given k 1d vectors? How well can your code be extended to such cases? The "Zigzag" order 
+# Follow up Zigzag Iterator: What if you are given k 1d vectors? How well can your code be extended to such cases? The "Zigzag" order
 # is not clearly defined and is ambiguous for k > 2 cases. If "Zigzag" does not look right to you, replace "Zigzag" with "Cyclic".
 
 # Example
@@ -21,8 +21,6 @@
 #     [3,3,3]
 # ]
 # Output: [1,2,3,1,2,3,1,2,3]
-    
-
 # Method 1. 双指针解法
 class ZigzagIterator2:
     """
@@ -78,3 +76,35 @@ class ZigzagIterator2:
 # solution, result = ZigzagIterator2(vecs), []
 # while solution.hasNext(): result.append(solution.next())
 # Output result
+
+## Method 2. 用Deque的自带属性
+class ZigzagIterator2:
+    """
+    @param: vecs: a list of 1d vectors
+    """
+
+    def __init__(self, vecs):
+        # do intialization if necessary
+        self.queue = collections.deque()
+        for vec in vecs:
+            if len(vec) > 0:
+                self.queue.append([iter(vec), len(vec)])
+
+    """
+    @return: An integer
+    """
+
+    def _next(self):
+        vec_iter, vec_len = self.queue.popleft()
+        value = next(vec_iter)
+        vec_len -= 1
+        if vec_len > 0:
+            self.queue.append([vec_iter, vec_len])
+        return value
+
+    """
+    @return: True if has next
+    """
+
+    def hasNext(self):
+        return len(self.queue) > 0
