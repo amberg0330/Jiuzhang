@@ -21,11 +21,12 @@
 #     [3,3,3]
 # ]
 # Output: [1,2,3,1,2,3,1,2,3]
-
-
 # Method 1. 双指针解法
 class ZigzagIterator2:
- 
+    """
+    @param: vecs: a list of 1d vectors
+    """
+
     def __init__(self, vecs):
         # do intialization if necessary
         self.row_ind = 0
@@ -36,6 +37,10 @@ class ZigzagIterator2:
         for i in range(len(self.vecs)):
             if len(self.vecs[i]) == 0:
                 self.non_empty_vec_cnt -= 1
+
+    """
+    @return: An integer
+    """
 
     def _next(self):
         mylist = []
@@ -57,24 +62,43 @@ class ZigzagIterator2:
 
             return value
 
+    """
+    @return: True if has next
+    """
+
     def hasNext(self):
         # write your code here
         # 如果所有行都被用掉 返回false
         return self.non_empty_vec_cnt > 0
 
+
+# Your ZigzagIterator2 object will be instantiated and called as such:
+# solution, result = ZigzagIterator2(vecs), []
+# while solution.hasNext(): result.append(solution.next())
+# Output result
+
 ## Method 2. 用Deque的自带属性
 class ZigzagIterator2:
+    """
+    @param: vecs: a list of 1d vectors
+    """
+
     def __init__(self, vecs):
         # do intialization if necessary
         self.queue = collections.deque()
         for vec in vecs:
+            #如果空行 不用加
             if len(vec) > 0:
+                # 把一对数据（迭代器 & 行的长度）加入queue -- 打包
                 self.queue.append([iter(vec), len(vec)])
 
     def _next(self):
+        # 同时取出queue中存放的一对数据
         vec_iter, vec_len = self.queue.popleft()
         value = next(vec_iter)
+        # 本行长度 - 1 
         vec_len -= 1
+        # 如果本行被掏空 不要再次入队
         if vec_len > 0:
             self.queue.append([vec_iter, vec_len])
         return value
