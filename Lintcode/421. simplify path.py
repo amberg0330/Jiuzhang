@@ -20,7 +20,6 @@
 # Explanation: "/" has no parent directory, so "/../" equals "/".
 
 
-
 class Solution: 
 
     def simplifyPath(self, path):
@@ -40,6 +39,6 @@ class Solution:
         mystring = ''
 
         while mystack: 
-            mystring += '/' + mystack.pop()
+            mystring = '/' + mystack.pop() + mystring 
         
         return mystring 
