@@ -22,13 +22,14 @@ class Solution:
         mystack = []
         num = 0 
         for ch in s: 
+            # 1. 如果是数字
             if ch.isdigit():
                 num = num * 10 + int(ch)
-            # 如果是"[", 把数字压线
+            # 2. 如果是"[", 把数字压线
             elif ch == "[":
                 mystack.append(num)
                 num = 0 #reset 数字！
-            # 如果是"]", 把string弹出 练成一个string
+            # 3. 如果是"]", 把string弹出 练成一个string
             # 然后把数字弹出 
             elif ch == "]":
                 strs = []
@@ -38,17 +39,15 @@ class Solution:
                 repeat_s = mystack.pop()
                 for _ in range(repeat_s): 
                     mystack.append("".join(strs))
-            # 如果是字母 直接压栈
+            # 4. 如果是字母 直接压栈
             else:
                 mystack.append(ch)
             
         strs = []
         while mystack:
-            strs.append(mystack.pop())
-        # 翻转 list
-        strs.reverse()
-        # 链接 list
-        return ''.join(strs)
+            strs.append(mystack.pop())      
+        strs.reverse()       # 翻转 list
+        return ''.join(strs) # 链接 list
 
 
 
