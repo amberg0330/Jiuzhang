@@ -42,7 +42,6 @@ class Solution:
             else:
                 mystack.append(ch)
             
-        
         strs = []
         while mystack:
             strs.append(mystack.pop())
