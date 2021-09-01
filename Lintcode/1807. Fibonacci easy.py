@@ -53,6 +53,7 @@ class Solution:
         return self.fibonacci(n - 1) + self.fibonacci(n - 2)
 
 # method 3: recursion + 记忆化搜索
+# 有点像动态规划
 class Solution:
     """
     @param n: an integer
