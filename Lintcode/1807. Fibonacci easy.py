@@ -33,7 +33,7 @@ class Solution:
 
         return second
 
-# method 2: recursion
+# method 2: recursion -- 这个方法有许多duplicate calculation
 class Solution:
     """
     @param n: an integer
@@ -51,3 +51,24 @@ class Solution:
             return 1
         # 递归三要素之二：递归拆解
         return self.fibonacci(n - 1) + self.fibonacci(n - 2)
+
+# method 3: recursion + 记忆化搜索
+class Solution:
+    """
+    @param n: an integer
+    @return: an ineger f(n)
+    """
+    def fibonacci(self, n):
+        if n < 1:
+            return -1
+        if n == 1:
+            return 0
+        arr = [0 for _ in range(n + 1)]
+        arr[2] = 1
+        return self.get_fibonacci(n, arr)
+
+    def get_fibonacci(self, n, arr):
+        if n == 1 or n == 2 or arr[n]>0:
+            return arr[n]
+        arr[n] = self.get_fibonacci(n - 1, arr) + self.get_fibonacci(n - 2, arr)
+        return arr[n]
