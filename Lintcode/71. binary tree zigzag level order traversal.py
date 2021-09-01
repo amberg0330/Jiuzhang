@@ -42,6 +42,8 @@ class TreeNode:
 """
 
 # method1：用 queue来做
+import collections
+
 class Solution:
     """
     @param root: A Tree
@@ -53,7 +55,7 @@ class Solution:
             return mylist
         #BFS 用到队列
         q = collections.deque()
-        is_left_to_right= True
+        is_left_to_right = True
         q.append(root)
 
         while len(q) != 0:
