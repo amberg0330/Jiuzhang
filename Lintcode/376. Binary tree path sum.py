@@ -66,7 +66,7 @@ class Solution:
         if node.left:
             path.append(node.left.val)
             self.dfs(node.left, path, result, target)
-            path.pop()
+            path.pop() #必须要退一步！
 
         if node.right:
             path.append(node.right.val)
